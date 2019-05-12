@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	Rigidbody rb;
+	private Rigidbody rb;
 	public float speed = 5.0f;
 
 	void Start () 
@@ -15,13 +15,10 @@ public class PlayerController : MonoBehaviour {
 		
 	void Update () 
 	{
-		if (Input.GetKey (KeyCode.RightArrow)) 
-		{
-			rb.velocity = transform.right * speed; 
-		}
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			rb.velocity = -transform.right * speed;
-		}
+		float movehorizontal = Input.GetAxis ("Horizontal");
+		float movevertical = Input.GetAxis ("Vertical");
+
+		Vector3 movement = new Vector3 (movehorizontal, 0, movevertical);
+		rb.AddForce (movement * speed);
 	}
 }
